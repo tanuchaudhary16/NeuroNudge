@@ -1,29 +1,73 @@
-# NeuroNudge
-NeuroNudge is a desktop-based AI assistant designed to enhance productivity and well-being through real-time emotion recognition and behavioral analysis. By combining webcam-based facial emotion detection with user activity tracking (typing speed, mouse movement, etc.), it provides personalized nudges that align with the user’s mental and emotional state.
+# NeuroNudge Python Backend
 
-Key Capabilities:
+This is the Python Flask backend for the NeuroNudge emotion-aware productivity application.
 
-1)Emotion Detection:
-Uses facial recognition via the webcam to monitor emotions such as stress, frustration, focus, or fatigue in real time.
-Tracks behavioral patterns like typing speed and mouse movements to refine emotional state prediction.
+## Features
 
-2)Adaptive Productivity Interventions:
-Provides personalized nudges tailored to the user’s current mood.
-Examples include:
-Reminders to take breaks when stress levels rise.
-Motivational quotes to boost morale.
-Calming or energizing music recommendations.
-Intelligent task reordering based on mental readiness.
-Well-being Monitoring:
-Tracks long-term emotional and behavioral data.
-Generates weekly well-being reports that highlight mood trends, productivity peaks, and burnout risks.
+- **Flask REST API** - Complete RESTful endpoints for all functionality
+- **SQLite Database** - Local database storage with automatic initialization
+- **CORS Support** - Cross-origin requests enabled for frontend integration
+- **Emotion Tracking** - Store and retrieve emotion detection data
+- **Behavioral Analytics** - Track typing speed, mouse activity, and focus scores
+- **Task Management** - AI-optimized task handling based on emotional states
+- **Intervention System** - Smart suggestions and mood-based interventions
 
-3)Flow State Optimization:
-Helps users achieve and sustain a “flow state” through ambient controls (lighting, background music, environment adjustments).
-AI-powered scheduling aligns tasks with the user’s optimal emotional and cognitive state.
+## Quick Start
 
-Benefits:
-Promotes mental well-being by preventing burnout and encouraging healthy work habits.
-Improves task efficiency by ensuring tasks are tackled at the right emotional moment.
-Encourages data-driven self-awareness, helping users reflect on their habits and emotional patterns.
-Acts as a smart personal assistant that adapts to the individual, rather than forcing rigid workflows.
+1. **Install Python Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Run the Application**
+   ```bash
+   python run.py
+   ```
+
+3. **Access the API**
+   - Server runs on `http://localhost:5000`
+   - Database auto-initializes on first run
+   - Default demo user and tasks are created automatically
+
+## API Endpoints
+
+### Behavioral Data
+- `POST /api/behavioral-data` - Record behavioral metrics
+- `GET /api/behavioral-data` - Retrieve behavioral history
+
+### Emotion Sessions  
+- `POST /api/emotion-sessions` - Create emotion tracking session
+- `GET /api/emotion-sessions` - Get emotion history
+- `PATCH /api/emotion-sessions/<id>` - Update emotion session
+
+### Tasks
+- `GET /api/tasks` - Get all tasks
+- `POST /api/tasks` - Create new task
+- `PATCH /api/tasks/<id>` - Update task
+- `DELETE /api/tasks/<id>` - Delete task
+
+### Interventions
+- `GET /api/interventions` - Get intervention history
+- `POST /api/interventions` - Record intervention
+- `PATCH /api/interventions/<id>` - Update intervention response
+
+### Analytics
+- `GET /api/analytics/today` - Get today's productivity analytics
+
+### Wellbeing Reports
+- `GET /api/wellbeing-reports` - Get wellbeing reports
+- `POST /api/wellbeing-reports` - Create wellbeing report
+
+## Database
+
+Uses SQLite with the following tables:
+- `users` - User accounts
+- `emotion_sessions` - Emotion detection history  
+- `behavioral_data` - Typing/mouse activity metrics
+- `interventions` - AI suggestions and responses
+- `tasks` - Task management with emotion optimization
+- `wellbeing_reports` - Weekly wellness summaries
+
+## Integration
+
+This Python backend is designed to work with the React frontend. The frontend should be configured to make requests to `http://localhost:5000/api/` for all backend operations.
